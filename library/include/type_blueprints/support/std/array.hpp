@@ -23,7 +23,7 @@
 // std::index_sequence, std::make_index_sequence.
 #include <utility>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 
 template <typename T, std::size_t N>
 struct sequence_fixed_count<std::array<T, N>>
@@ -56,4 +56,4 @@ struct placeholder_value<std::array<T, N>>
     }
 };
 
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

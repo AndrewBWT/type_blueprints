@@ -23,7 +23,7 @@ struct unmakeable
 };
 } // namespace pair_test_types
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 namespace support_std_pair_tests
 {
 using namespace ::pair_test_types;
@@ -40,4 +40,4 @@ static_assert(makes_pair());
 static_assert(not has_placeholder_value_c<std::pair<int, int>>);
 static_assert(not placeholder_constructible_c<std::pair<int, unmakeable>>);
 } // namespace support_std_pair_tests
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

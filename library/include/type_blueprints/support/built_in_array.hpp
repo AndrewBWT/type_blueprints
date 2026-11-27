@@ -13,7 +13,7 @@
  // std::size_t.
 #include <cstddef>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 
 template <typename T, std::size_t N>
 struct default_appender<T[N]> : fixed_size_appender<T[N]>
@@ -21,4 +21,4 @@ struct default_appender<T[N]> : fixed_size_appender<T[N]>
     using fixed_size_appender<T[N]>::fixed_size_appender;
 };
 
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

@@ -11,7 +11,7 @@
 #include <type_traits>
 #include <utility>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 namespace support_built_in_array_tests
 {
 static_assert(std::is_base_of_v<fixed_size_appender<int[3]>, default_appender<int[3]>>);
@@ -37,4 +37,4 @@ constexpr bool
 
 static_assert(builds());
 } // namespace support_built_in_array_tests
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

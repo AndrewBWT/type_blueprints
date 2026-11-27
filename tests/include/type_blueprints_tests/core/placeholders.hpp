@@ -43,7 +43,7 @@ struct both
 };
 } // namespace placeholder_test_types
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 
 template <>
 struct placeholder_value<placeholder_test_types::no_default>
@@ -167,4 +167,4 @@ constexpr bool
 
 static_assert(builds_built_in_array_of_no_default());
 } // namespace placeholders_tests
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

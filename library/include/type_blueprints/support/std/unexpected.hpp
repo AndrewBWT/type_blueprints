@@ -11,7 +11,7 @@
  // std::unexpected.
 #include <expected>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 
 // Holds its error's placeholder.
 template <typename E>
@@ -25,4 +25,4 @@ struct placeholder_value<std::unexpected<E>>
     }
 };
 
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

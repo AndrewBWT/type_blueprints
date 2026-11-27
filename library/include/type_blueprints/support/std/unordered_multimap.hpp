@@ -13,7 +13,7 @@
 // std::unordered_multimap.
 #include <unordered_map>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 
 template <
     typename Key,
@@ -31,4 +31,4 @@ struct default_appender<
         multi_insert_appender;
 };
 
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

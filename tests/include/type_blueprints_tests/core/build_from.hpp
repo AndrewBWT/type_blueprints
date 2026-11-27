@@ -57,7 +57,7 @@ struct no_default
 };
 } // namespace build_from_test_types
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 
 template <>
 struct placeholder_value<build_from_test_types::no_default>
@@ -247,4 +247,4 @@ TEST_CASE("build_from builds a std::valarray", "[build_from]")
     CHECK((*result)[2] == 3);
 }
 } // namespace build_from_tests
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

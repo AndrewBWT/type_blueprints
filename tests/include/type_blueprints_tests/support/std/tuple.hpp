@@ -27,7 +27,7 @@ struct unmakeable
 };
 } // namespace tuple_test_types
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 namespace support_std_tuple_tests
 {
 using namespace ::tuple_test_types;
@@ -59,4 +59,4 @@ constexpr bool
 
 static_assert(makes_nested());
 } // namespace support_std_tuple_tests
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

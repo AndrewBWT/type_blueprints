@@ -11,7 +11,7 @@
 // For std::invalid_argument.
 #include <stdexcept>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 
 /*!
  * @brief An enum_element; the enum value with its string name.
@@ -52,7 +52,7 @@ struct enum_element
  * listed, as value to name must be a function. List one of them.
  *
  * @code
- * UAB_NS_BEGIN
+ * TYPE_BLUEPRINTS_NS_BEGIN
  * template <>
  * struct enum_list<result>
  * {
@@ -71,7 +71,7 @@ struct enum_element
  *         {result::fail, u8"✗"},
  *     };
  * };
- * UAB_NS_END
+ * TYPE_BLUEPRINTS_NS_END
  * @endcode
  *
  * @tparam E The enumeration.
@@ -256,7 +256,7 @@ private:
 template <typename Container>
 enum_list_view(const Container&)
 -> enum_list_view<typename Container::value_type::enum_type>;
-UAB_INTERNAL_NS_BEGIN
+TYPE_BLUEPRINTS_INTERNAL_NS_BEGIN
 /*!
  * @brief Checks that enum_list<E, Version> has a values member that an
  * enum_list_view can be built from.
@@ -265,7 +265,7 @@ UAB_INTERNAL_NS_BEGIN
 concept has_values_c = std::is_enum_v<E> && requires {
     enum_list_view<E>(enum_list<E, Version>::values);
 };
-UAB_INTERNAL_NS_END
+TYPE_BLUEPRINTS_INTERNAL_NS_END
 /*!
  * @brief Checks that an enum_list is defined for an enumeration, and that an
  * enum_list_view can be built from its values.
@@ -281,7 +281,7 @@ UAB_INTERNAL_NS_END
     template <typename E, typename Version = void>
 concept has_enum_list_c
 = internal::has_values_c<E, Version>
-&& (std::is_void_v<Version> || UAB_INTERNAL_NS::has_values_c<E, void>);
+&& (std::is_void_v<Version> || TYPE_BLUEPRINTS_INTERNAL_NS::has_values_c<E, void>);
 
 /*!
  * @brief A view of an enum_list, usable at compile time and at runtime.
@@ -297,7 +297,7 @@ template <typename E, typename Version = void>
     requires has_enum_list_c<E, Version>
 consteval enum_list_view<E>
 enumerators_of();
-UAB_INTERNAL_NS_BEGIN
+TYPE_BLUEPRINTS_INTERNAL_NS_BEGIN
 
 /*!
  * @brief Builds the view of enum_list<E, Version>::values, and checks it:
@@ -528,10 +528,10 @@ check_matches_base(
         }
     }
 }
-UAB_INTERNAL_NS_END
-UAB_NS_END
+TYPE_BLUEPRINTS_INTERNAL_NS_END
+TYPE_BLUEPRINTS_NS_END
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 template <typename E>
     requires std::is_enum_v<E>
 constexpr enum_list_view<E>::enum_list_view(
@@ -689,7 +689,7 @@ enumerators_of()
     return internal::checked_view_v<E, Version>;
 }
 
-UAB_INTERNAL_NS_BEGIN
+TYPE_BLUEPRINTS_INTERNAL_NS_BEGIN
 template <typename E, typename Version>
 constexpr enum_list_view<E>
 make_checked_view()
@@ -706,6 +706,6 @@ make_checked_view()
     }
     return view;
 }
-UAB_INTERNAL_NS_END
+TYPE_BLUEPRINTS_INTERNAL_NS_END
 
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

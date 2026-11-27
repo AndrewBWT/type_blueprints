@@ -16,7 +16,7 @@
 #include <unordered_map>
 #include <unordered_set>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 namespace unique_insert_tests
 {
 static_assert(appender_c<unique_insert_appender<std::set<int>>, std::set<int>>);
@@ -58,4 +58,4 @@ TEST_CASE("unique_insert_appender builds maps from pair<K, V>, keeping the first
     CHECK(unordered.at(2) == 'c');
 }
 } // namespace unique_insert_tests
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

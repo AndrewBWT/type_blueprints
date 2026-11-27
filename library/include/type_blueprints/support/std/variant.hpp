@@ -16,7 +16,7 @@
 // std::variant.
 #include <variant>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 
 // Holds its first alternative's placeholder, as a default-constructed variant
 // holds a default-constructed first alternative. Only the first alternative
@@ -35,4 +35,4 @@ struct placeholder_value<std::variant<T, Ts...>>
     }
 };
 
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

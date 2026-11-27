@@ -13,7 +13,7 @@
 #include <type_traits>
 #include <valarray>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 namespace support_std_valarray_tests
 {
 static_assert(std::is_base_of_v<
@@ -51,4 +51,4 @@ TEST_CASE("std::valarray keeps elements already there, in front", "[support][val
     CHECK(existing[2] == 9);
 }
 } // namespace support_std_valarray_tests
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

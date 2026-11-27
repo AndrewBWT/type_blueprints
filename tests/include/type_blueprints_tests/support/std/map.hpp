@@ -14,7 +14,7 @@
 #include <type_traits>
 #include <utility>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 namespace support_std_map_tests
 {
 using container_t = std::map<int, char>;
@@ -40,4 +40,4 @@ TEST_CASE("default_appender builds a std::map", "[support][map]")
     CHECK(container == std::map<int, char>{{1, 'a'}, {2, 'b'}});
 }
 } // namespace support_std_map_tests
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

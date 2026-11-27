@@ -16,7 +16,7 @@
 #include <unordered_map>
 #include <unordered_set>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 namespace multi_insert_tests
 {
 static_assert(appender_c<multi_insert_appender<std::multiset<int>>, std::multiset<int>>);
@@ -59,4 +59,4 @@ TEST_CASE("multi_insert_appender keeps every value for a key", "[appenders][mult
     CHECK(unordered.count(2) == 2);
 }
 } // namespace multi_insert_tests
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

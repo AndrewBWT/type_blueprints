@@ -15,7 +15,7 @@
 // std::move.
 #include <utility>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 
 /*!
  * @brief Adds elements at the end with insert_after, so they keep the order
@@ -70,4 +70,4 @@ private:
     typename T::iterator _last;
 };
 
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

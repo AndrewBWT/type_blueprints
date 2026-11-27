@@ -14,7 +14,7 @@
 #include <type_traits>
 #include <vector>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 namespace support_std_stack_tests
 {
 static_assert(adaptor_c<std::stack<int>>);
@@ -38,4 +38,4 @@ TEST_CASE("std::stack's container holds its elements bottom to top", "[adaptors]
     CHECK(rebuilt.size() == 3);
 }
 } // namespace support_std_stack_tests
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

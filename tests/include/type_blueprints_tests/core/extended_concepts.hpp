@@ -242,7 +242,7 @@ const int*
     end(const iterable_test_types::unreachable_begin_end&) noexcept;
 } // namespace elsewhere
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 
 namespace extended_concepts_tests
 {
@@ -425,4 +425,4 @@ static_assert(not iterable_c<std::tuple<int, int>>);
 static_assert(not iterable_c<std::pair<int, int>>);
 } // namespace extended_concepts_tests
 
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

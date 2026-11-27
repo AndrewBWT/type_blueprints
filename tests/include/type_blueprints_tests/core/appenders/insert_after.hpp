@@ -13,7 +13,7 @@
 
 #include <forward_list>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 namespace insert_after_tests
 {
 static_assert(appender_c<
@@ -44,4 +44,4 @@ TEST_CASE("insert_after_appender keeps the order elements are given in", "[appen
     }
 }
 } // namespace insert_after_tests
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

@@ -36,7 +36,7 @@ struct needs_state
 };
 } // namespace priority_queue_test_types
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 namespace support_std_priority_queue_tests
 {
 using namespace ::priority_queue_test_types;
@@ -72,4 +72,4 @@ TEST_CASE("std::priority_queue is rebuilt as a heap", "[adaptors][priority_queue
     }
 }
 } // namespace support_std_priority_queue_tests
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

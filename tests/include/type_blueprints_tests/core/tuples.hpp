@@ -206,7 +206,7 @@ struct std::tuple_element<0, user::no_get>
     using type = int;
 };
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 namespace tuples_tests
 {
     // ============================================================
@@ -507,4 +507,4 @@ namespace tuples_tests
 
     static_assert(takes_integral_tuple(std::tuple<int, char>{}));
 } // namespace tuples_tests
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

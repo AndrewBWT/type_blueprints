@@ -35,9 +35,9 @@
 // std::pair.
 #include <utility>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 
-UAB_INTERNAL_NS_BEGIN
+TYPE_BLUEPRINTS_INTERNAL_NS_BEGIN
 
 // No element type, unless one of the cases below applies. They're exclusive
 // (array or not), and internal, so users never collide with them.
@@ -62,7 +62,7 @@ struct detected_sequence_value<T>
     using type = typename T::value_type;
 };
 
-UAB_INTERNAL_NS_END
+TYPE_BLUEPRINTS_INTERNAL_NS_END
 
 /*!
  * @brief The element type of a sequence, as a member type named type.
@@ -75,7 +75,7 @@ UAB_INTERNAL_NS_END
  * sequence_elements (as support/std/bitset.hpp does for std::bitset).
  */
 template <typename T>
-struct sequence_value : UAB_INTERNAL_NS::detected_sequence_value<T>
+struct sequence_value : TYPE_BLUEPRINTS_INTERNAL_NS::detected_sequence_value<T>
 {};
 
 /*!
@@ -86,7 +86,7 @@ using sequence_value_t = typename sequence_value<T>::type;
 
 // ============================================================ build type
 
-UAB_INTERNAL_NS_BEGIN
+TYPE_BLUEPRINTS_INTERNAL_NS_BEGIN
 // The build type, given element type Value: Value itself, unless T is
 // map-like.
 template <typename T, typename Value>
@@ -121,7 +121,7 @@ requires requires { typename sequence_value<T>::type; }
 struct detected_sequence_build_value<T>
     : build_value_from<T, typename sequence_value<T>::type>
 {};
-UAB_INTERNAL_NS_END
+TYPE_BLUEPRINTS_INTERNAL_NS_END
 
 /*!
  * @brief The type of element added when building a sequence, as a member
@@ -134,7 +134,7 @@ UAB_INTERNAL_NS_END
  * std::pair<key_type, mapped_type>.
  */
 template <typename T>
-struct sequence_build_value : UAB_INTERNAL_NS::detected_sequence_build_value<T>
+struct sequence_build_value : TYPE_BLUEPRINTS_INTERNAL_NS::detected_sequence_build_value<T>
 {};
 
 /*!
@@ -167,7 +167,7 @@ struct sequence_elements
 
 // ============================================================ fixed count
 
-UAB_INTERNAL_NS_BEGIN
+TYPE_BLUEPRINTS_INTERNAL_NS_BEGIN
 // No fixed count, unless T is a built-in array.
 template <typename T>
 struct detected_sequence_fixed_count
@@ -179,7 +179,7 @@ struct detected_sequence_fixed_count<T>
 {
     static constexpr std::size_t value = std::extent_v<T>;
 };
-UAB_INTERNAL_NS_END
+TYPE_BLUEPRINTS_INTERNAL_NS_END
 
 /*!
  * @brief The number of elements in a sequence whose length is part of its
@@ -189,7 +189,7 @@ UAB_INTERNAL_NS_END
  * support/std/ for std::array and std::bitset.
  */
 template <typename T>
-struct sequence_fixed_count : UAB_INTERNAL_NS::detected_sequence_fixed_count<T>
+struct sequence_fixed_count : TYPE_BLUEPRINTS_INTERNAL_NS::detected_sequence_fixed_count<T>
 {};
 
 // ============================================================ concepts
@@ -233,4 +233,4 @@ requires fixed_count_sequence_c<T>
 inline constexpr std::size_t sequence_fixed_count_v
     = sequence_fixed_count<T>::value;
 
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

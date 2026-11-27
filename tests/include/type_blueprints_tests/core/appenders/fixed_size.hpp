@@ -11,7 +11,7 @@
 
 #include <utility>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 namespace fixed_size_tests
 {
 static_assert(appender_c<fixed_size_appender<int[3]>, int[3]>);
@@ -58,4 +58,4 @@ constexpr bool
 
 static_assert(fills_nested_array());
 } // namespace fixed_size_tests
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

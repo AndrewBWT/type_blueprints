@@ -13,7 +13,7 @@
 #include <queue>
 #include <type_traits>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 namespace support_std_queue_tests
 {
 static_assert(adaptor_c<std::queue<int>>);
@@ -32,4 +32,4 @@ TEST_CASE("std::queue's container holds its elements front to back", "[adaptors]
     CHECK(rebuilt.back() == 2);
 }
 } // namespace support_std_queue_tests
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

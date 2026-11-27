@@ -195,7 +195,7 @@ struct wrong_count_type
 {
 };
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 
 template <std::size_t N>
 struct sequence_fixed_count<fixed_buffer<N>>
@@ -402,4 +402,4 @@ namespace sequence_traits_tests
 
     static_assert(reads_bitset_most_significant_first());
 } // namespace sequence_traits_tests
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

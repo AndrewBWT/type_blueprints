@@ -89,7 +89,7 @@ struct unlisted
 };
 } // namespace object_test_types
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 
 template <>
 struct object_traits<object_test_types::point>
@@ -305,4 +305,4 @@ constexpr bool
 static_assert(builds_empty());
 } // namespace object_tests
 
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

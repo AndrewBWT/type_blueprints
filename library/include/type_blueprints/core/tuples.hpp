@@ -19,8 +19,8 @@
  *
  */
 
-UAB_NS_BEGIN
-UAB_INTERNAL_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
+TYPE_BLUEPRINTS_INTERNAL_NS_BEGIN
 /*!
  * @brief Checks a function f is callable and valid for each integer I in
  * Indices (a std::index_sequence).
@@ -68,7 +68,7 @@ inline constexpr bool testable_with_indices_v = false;
 template <typename F, std::size_t... Is>
 inline constexpr bool testable_with_indices_v<F, std::index_sequence<Is...>>
     = (testable_with_index_c<F, Is> && ...);
-UAB_INTERNAL_NS_END
+TYPE_BLUEPRINTS_INTERNAL_NS_END
 /*!
  * @brief Checks that the function type F can be called with all integer
  * constants from 0 to N - 1.
@@ -79,7 +79,7 @@ UAB_INTERNAL_NS_END
  * @tparam N The limit on the integer parameter to check.
  */
 template <typename F, std::size_t N>
-concept index_function_c = UAB_INTERNAL_NS::
+concept index_function_c = TYPE_BLUEPRINTS_INTERNAL_NS::
     callable_with_indices_v<F, std::make_index_sequence<N>>;
 /*!
  * @brief Checks that the function type F can be called with all integer
@@ -91,7 +91,7 @@ concept index_function_c = UAB_INTERNAL_NS::
  * @tparam N The limit on the integer parameter to check.
  */
 template <typename F, std::size_t N>
-concept index_predicate_c = UAB_INTERNAL_NS::
+concept index_predicate_c = TYPE_BLUEPRINTS_INTERNAL_NS::
     testable_with_indices_v<F, std::make_index_sequence<N>>;
 /*!
  * @brief Calls the function function_arg on all integers from 0 to N-1 in
@@ -130,7 +130,7 @@ requires index_predicate_c<F, N>
 constexpr bool
     all_of_indices(F&& function_arg);
 
-UAB_INTERNAL_NS_BEGIN
+TYPE_BLUEPRINTS_INTERNAL_NS_BEGIN
 /*!
  * @brief Concept to check whether a tuple-like entity has a member get<I>()
  * function callable on it - as some tuple-like objects provide it instead of a
@@ -168,7 +168,7 @@ template <typename T, std::size_t I>
 concept element_gettable_c
     = (member_get_c<T&, I> || free_get_c<T&, I>)
       && requires { typename std::tuple_element<I, T>::type; };
-UAB_INTERNAL_NS_END
+TYPE_BLUEPRINTS_INTERNAL_NS_END
 /*!
  * @brief Concept for checking that a type T is tuple-like.
  *
@@ -183,7 +183,7 @@ template <typename T>
 concept tuple_like_c = requires {
     typename std::integral_constant<std::size_t, std::tuple_size<T>::value>;
 }&& all_of_indices<std::tuple_size<T>::value>(
-    [](auto index) { return UAB_INTERNAL_NS::element_gettable_c<T, decltype(index)::value>; }
+    [](auto index) { return TYPE_BLUEPRINTS_INTERNAL_NS::element_gettable_c<T, decltype(index)::value>; }
 );
 /*!
  * @brief Generic function for getting an element from a tuple-like object.
@@ -258,9 +258,9 @@ concept all_elements_c = tuple_like_c<Tuple>
                              }
                          );
 
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 template <std::size_t N, typename F>
 requires index_function_c<F, N>
 constexpr void
@@ -302,11 +302,11 @@ constexpr decltype(auto)
     )
 {
     // Favours calling the member parameter.
-    if constexpr (UAB_INTERNAL_NS::member_get_c<Tuple, I>)
+    if constexpr (TYPE_BLUEPRINTS_INTERNAL_NS::member_get_c<Tuple, I>)
     {
         return std::forward<Tuple>(tuple_arg).template get<I>();
     }
-    else if constexpr (UAB_INTERNAL_NS::free_get_c<Tuple, I>)
+    else if constexpr (TYPE_BLUEPRINTS_INTERNAL_NS::free_get_c<Tuple, I>)
     {
         return get<I>(std::forward<Tuple>(tuple_arg));
     }
@@ -338,4 +338,4 @@ constexpr void
     );
 }
 
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

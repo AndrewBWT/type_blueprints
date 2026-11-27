@@ -9,7 +9,7 @@
 #include <type_traits>
 
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 /*!
  * @brief Describes a contiguous container. Requires:
  * - member type "value_type".
@@ -45,7 +45,7 @@ template <typename Container, typename T>
 concept contiguous_container_of_c
     = contiguous_container_c<Container>
       && std::same_as<typename Container::value_type, T>;
-UAB_INTERNAL_NS_BEGIN
+TYPE_BLUEPRINTS_INTERNAL_NS_BEGIN
 /*!
  * @brief Whether T is a specialization of the class template Template: true
  * for is_specialization_of_v<std::tuple<int, char>, std::tuple>, false for
@@ -78,7 +78,7 @@ inline constexpr bool is_specialization_of_v = false;
  */
 template <template <typename...> typename Template, typename... Ts>
 inline constexpr bool is_specialization_of_v<Template<Ts...>, Template> = true;
-UAB_INTERNAL_NS_END
+TYPE_BLUEPRINTS_INTERNAL_NS_END
 // public
 /*!
  * @brief Satisfied when T is a specialisation of Template, such as
@@ -89,7 +89,7 @@ UAB_INTERNAL_NS_END
  * not removed.
  */
 template <typename T, template <typename...> typename Template>
-concept specialization_of_c = UAB_INTERNAL_NS::is_specialization_of_v<T, Template>;
+concept specialization_of_c = TYPE_BLUEPRINTS_INTERNAL_NS::is_specialization_of_v<T, Template>;
 /*!
  * @brief Satisfied when a range-for can iterate a const T, by the rules a
  * range-for uses: T is a built-in array of known bound; or T has begin() and
@@ -107,4 +107,4 @@ concept iterable_c
           begin(object_arg);
           end(object_arg);
       };
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

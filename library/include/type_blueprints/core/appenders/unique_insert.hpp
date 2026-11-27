@@ -15,7 +15,7 @@
 // std::move.
 #include <utility>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 
 /*!
  * @brief Adds elements with insert(value), which returns a pair whose second
@@ -66,4 +66,4 @@ private:
     T* _container;
 };
 
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

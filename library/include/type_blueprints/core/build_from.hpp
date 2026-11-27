@@ -18,7 +18,7 @@
 // std::is_array_v, std::is_constructible_v.
 #include <type_traits>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 
 /*!
  * @brief Satisfied when build_from<T> can build a T from a Source: T is
@@ -79,4 +79,4 @@ build_from(
     return result;
 }
 
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

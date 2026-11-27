@@ -15,7 +15,7 @@
 // std::move.
 #include <utility>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 
 /*!
  * @brief Adds elements with insert(value). Every element is added, even when
@@ -60,4 +60,4 @@ private:
     T* _container;
 };
 
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

@@ -12,7 +12,7 @@
 #include <compare>
 #include <type_traits>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 namespace support_std_compare_tests
 {
 static_assert(not std::is_default_constructible_v<std::strong_ordering>);
@@ -54,4 +54,4 @@ constexpr bool
 
 static_assert(builds_built_in_array_of_orderings());
 } // namespace support_std_compare_tests
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

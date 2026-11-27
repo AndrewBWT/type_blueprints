@@ -26,7 +26,7 @@
 // std::declval, std::move.
 #include <utility>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 
 /*!
  * @brief Describes T as an object: a type made of fields.
@@ -40,7 +40,7 @@ UAB_NS_BEGIN
  * instead, for fields only reachable through getters that return by value.
  *
  * @code
- * UAB_NS_BEGIN
+ * TYPE_BLUEPRINTS_NS_BEGIN
  * template <>
  * struct object_traits<geo::point>
  * {
@@ -50,7 +50,7 @@ UAB_NS_BEGIN
  *         return std::tie(point_arg.x, point_arg.y);
  *     }
  * };
- * UAB_NS_END
+ * TYPE_BLUEPRINTS_NS_END
  * @endcode
  */
 template <typename T>
@@ -84,7 +84,7 @@ using object_fields_t = std::remove_cvref_t<
     decltype(object_traits<T>::to_tuple(std::declval<const T&>()))>;
 
 // Swap for your internal namespace macro.
-UAB_INTERNAL_NS_BEGIN
+TYPE_BLUEPRINTS_INTERNAL_NS_BEGIN
 
 /*!
  * @brief The values of a tuple of fields: each element with references,
@@ -123,7 +123,7 @@ inline constexpr bool constructible_from_values_v = false;
 template <typename T, typename... Values>
 inline constexpr bool constructible_from_values_v<T, std::tuple<Values...>>
     = std::is_constructible_v<T, Values&&...>;
-UAB_INTERNAL_NS_END
+TYPE_BLUEPRINTS_INTERNAL_NS_END
 
 /*!
  * @brief A std::tuple holding values of T's fields: object_fields_t<T> with
@@ -134,7 +134,7 @@ UAB_INTERNAL_NS_END
  */
 template <typename T>
 requires object_c<T>
-using object_values_t = typename UAB_INTERNAL_NS::values_of<object_fields_t<T>>::type;
+using object_values_t = typename TYPE_BLUEPRINTS_INTERNAL_NS::values_of<object_fields_t<T>>::type;
 
 /*!
  * @brief Satisfied when T is an object whose fields can be held as values:
@@ -160,7 +160,7 @@ concept valued_object_c
 template <typename T>
 concept buildable_object_c
     = valued_object_c<T>
-      && UAB_INTERNAL_NS::constructible_from_values_v<T, object_values_t<T>>;
+      && TYPE_BLUEPRINTS_INTERNAL_NS::constructible_from_values_v<T, object_values_t<T>>;
 
 /*!
  * @brief T's fields, as object_traits<T>::to_tuple returns them.
@@ -193,7 +193,7 @@ constexpr object_fields_t<T>
  * only values, to_tuple on a temporary is safe and allowed.
  */
 template <typename T>
-requires object_c<T> && UAB_INTERNAL_NS::holds_references_v<object_fields_t<T>>
+requires object_c<T> && TYPE_BLUEPRINTS_INTERNAL_NS::holds_references_v<object_fields_t<T>>
 void
     to_tuple(const T&&)
     = delete;
@@ -238,4 +238,4 @@ constexpr T
     return std::make_from_tuple<T>(std::move(values_arg));
 }
 
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

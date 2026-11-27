@@ -116,7 +116,7 @@ struct doubled
 };
 } // namespace appender_test_types
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 
 template <>
 struct default_appender<appender_test_types::chooses_insert>
@@ -242,4 +242,4 @@ TEST_CASE("A type with push_back and insert builds as its author chose", "[appen
     CHECK(container.values == std::vector<int>{1});
 }
 } // namespace appenders_tests
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

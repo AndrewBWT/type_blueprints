@@ -21,7 +21,7 @@
 // std::vector.
 #include <vector>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 
 /*!
  * @brief Builds a std::valarray by collecting its elements, then constructing
@@ -77,4 +77,4 @@ struct default_appender<std::valarray<T>> : valarray_appender<T>
     using valarray_appender<T>::valarray_appender;
 };
 
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

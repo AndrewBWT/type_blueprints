@@ -48,7 +48,7 @@ protected:
 };
 } // namespace adaptor_test_types
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 
 template <>
 struct adaptor_traits<adaptor_test_types::wrapper>
@@ -102,4 +102,4 @@ TEST_CASE("A user's adaptor works through its specialisation", "[adaptors]")
     CHECK(wrapper_round_trip());
 }
 } // namespace adaptors_tests
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

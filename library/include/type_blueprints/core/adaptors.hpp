@@ -18,7 +18,7 @@
 // std::move.
 #include <utility>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 
 /*!
  * @brief Describes A as an adaptor: a type that wraps a container.
@@ -64,7 +64,7 @@ template <typename A>
 requires adaptor_c<A>
 using adaptor_container_t = typename adaptor_traits<A>::container_type;
 
-UAB_INTERNAL_NS_BEGIN
+TYPE_BLUEPRINTS_INTERNAL_NS_BEGIN
 
 /*!
  * @brief Reaches the protected container member c of a standard adaptor
@@ -84,6 +84,6 @@ struct standard_adaptor_access : A
     }
 };
 
-UAB_INTERNAL_NS_END
+TYPE_BLUEPRINTS_INTERNAL_NS_END
 
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

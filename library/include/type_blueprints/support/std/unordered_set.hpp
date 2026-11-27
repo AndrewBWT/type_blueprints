@@ -13,7 +13,7 @@
 // std::unordered_set.
 #include <unordered_set>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 
 template <typename Key, typename Hash, typename KeyEqual, typename Allocator>
 struct default_appender<std::unordered_set<Key, Hash, KeyEqual, Allocator>>
@@ -24,4 +24,4 @@ struct default_appender<std::unordered_set<Key, Hash, KeyEqual, Allocator>>
         unique_insert_appender;
 };
 
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

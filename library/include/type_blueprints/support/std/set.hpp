@@ -13,7 +13,7 @@
  // std::set.
 #include <set>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 
 template <typename Key, typename Compare, typename Allocator>
 struct default_appender<std::set<Key, Compare, Allocator>>
@@ -22,4 +22,4 @@ struct default_appender<std::set<Key, Compare, Allocator>>
     using unique_insert_appender<std::set<Key, Compare, Allocator>>::unique_insert_appender;
 };
 
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

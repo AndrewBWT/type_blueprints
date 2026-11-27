@@ -35,7 +35,7 @@ struct unmakeable
 };
 } // namespace array_test_types
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 
 template <>
 struct placeholder_value<array_test_types::no_default>
@@ -145,4 +145,4 @@ constexpr bool
 
 static_assert(builds_array_of_no_default());
 } // namespace support_std_array_tests
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

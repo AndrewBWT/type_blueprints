@@ -9,7 +9,7 @@
 #include <string>
 #include <type_traits>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 namespace support_std_string_tests
 {
 using container_t = std::u8string;
@@ -33,4 +33,4 @@ constexpr bool
 
 static_assert(builds());
 } // namespace support_std_string_tests
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

@@ -23,7 +23,7 @@ struct unmakeable
 };
 } // namespace expected_test_types
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 namespace support_std_expected_tests
 {
 using namespace ::expected_test_types;
@@ -41,4 +41,4 @@ static_assert(makes_expected_with_value());
 static_assert(not has_placeholder_value_c<std::expected<int, std::strong_ordering>>);
 static_assert(not placeholder_constructible_c<std::expected<unmakeable, int>>);
 } // namespace support_std_expected_tests
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

@@ -17,7 +17,7 @@
 // std::move.
 #include <utility>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 // Whether T isn't an array and can be move-assigned.
 template <typename T>
 concept move_assignable_value_c
@@ -31,7 +31,7 @@ concept move_assignable_array_c
     = std::is_bounded_array_v<T>
       && move_assignable_value_c<std::remove_all_extents_t<T>>;
 
-UAB_INTERNAL_NS_BEGIN
+TYPE_BLUEPRINTS_INTERNAL_NS_BEGIN
 template <typename T>
 requires move_assignable_array_c<T> || move_assignable_value_c<T>
 constexpr void
@@ -61,7 +61,7 @@ constexpr void
     }
 }
 
-UAB_INTERNAL_NS_END
+TYPE_BLUEPRINTS_INTERNAL_NS_END
 
 /*!
  * @brief Fills a fixed-length sequence by index, from the first element.
@@ -91,7 +91,7 @@ public:
         {
             return append_result::full;
         }
-        UAB_INTERNAL_NS::move_assign(
+        TYPE_BLUEPRINTS_INTERNAL_NS::move_assign(
             (*_container)[_count], std::move(value_arg)
         );
         ++_count;
@@ -116,4 +116,4 @@ private:
     std::size_t                  _count = 0;
 };
 
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

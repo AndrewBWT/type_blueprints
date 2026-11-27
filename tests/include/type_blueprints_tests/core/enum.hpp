@@ -167,7 +167,7 @@ struct repeated_name_version
 {
 };
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 
 template <>
 struct enum_list<colour>
@@ -351,7 +351,7 @@ struct enum_list<colour, repeated_name_version>
 };
 
 // The tests sit inside the library's namespace, so they don't depend on what
-// UAB_NS_BEGIN names it.
+// TYPE_BLUEPRINTS_NS_BEGIN names it.
 namespace enums_tests
 {
     // A type derived from enum_element: a container of these must not be viewed
@@ -501,18 +501,18 @@ namespace enums_tests
     // ============================================================ ASCII
     // identifier check, used on base names
 
-    static_assert(UAB_INTERNAL_NS::is_ascii_identifier(u8"red"));
-    static_assert(UAB_INTERNAL_NS::is_ascii_identifier(u8"_red"));
-    static_assert(UAB_INTERNAL_NS::is_ascii_identifier(u8"Red_2"));
-    static_assert(UAB_INTERNAL_NS::is_ascii_identifier(u8"_"));
-    static_assert(not UAB_INTERNAL_NS::is_ascii_identifier(u8""));
-    static_assert(not UAB_INTERNAL_NS::is_ascii_identifier(u8"2red"));
-    static_assert(not UAB_INTERNAL_NS::is_ascii_identifier(u8"dark green"));
-    static_assert(not UAB_INTERNAL_NS::is_ascii_identifier(u8"red-ish"));
-    static_assert(not UAB_INTERNAL_NS::is_ascii_identifier(u8"geo::red"));
-    static_assert(not UAB_INTERNAL_NS::is_ascii_identifier(u8"été"));
+    static_assert(TYPE_BLUEPRINTS_INTERNAL_NS::is_ascii_identifier(u8"red"));
+    static_assert(TYPE_BLUEPRINTS_INTERNAL_NS::is_ascii_identifier(u8"_red"));
+    static_assert(TYPE_BLUEPRINTS_INTERNAL_NS::is_ascii_identifier(u8"Red_2"));
+    static_assert(TYPE_BLUEPRINTS_INTERNAL_NS::is_ascii_identifier(u8"_"));
+    static_assert(not TYPE_BLUEPRINTS_INTERNAL_NS::is_ascii_identifier(u8""));
+    static_assert(not TYPE_BLUEPRINTS_INTERNAL_NS::is_ascii_identifier(u8"2red"));
+    static_assert(not TYPE_BLUEPRINTS_INTERNAL_NS::is_ascii_identifier(u8"dark green"));
+    static_assert(not TYPE_BLUEPRINTS_INTERNAL_NS::is_ascii_identifier(u8"red-ish"));
+    static_assert(not TYPE_BLUEPRINTS_INTERNAL_NS::is_ascii_identifier(u8"geo::red"));
+    static_assert(not TYPE_BLUEPRINTS_INTERNAL_NS::is_ascii_identifier(u8"été"));
     // An embedded null; built with a length, as a literal would stop at it.
-    static_assert(not UAB_INTERNAL_NS::is_ascii_identifier(std::u8string_view(u8"red\0", 4)));
+    static_assert(not TYPE_BLUEPRINTS_INTERNAL_NS::is_ascii_identifier(std::u8string_view(u8"red\0", 4)));
 
     // ============================================================ lists built in
     // constant evaluation, for an enum with no enum_list
@@ -785,7 +785,7 @@ namespace enums_tests
     {
         // What enumerators_of would do at compile time, done at runtime so the
         // exception can be checked. At compile time each of these is an error.
-        using UAB_INTERNAL_NS::make_checked_view;
+        using TYPE_BLUEPRINTS_INTERNAL_NS::make_checked_view;
 
         SECTION("An empty list")
         {
@@ -872,4 +872,4 @@ namespace enums_tests
     }
 } // namespace enums_tests
 
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

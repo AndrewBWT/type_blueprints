@@ -14,7 +14,7 @@
 #include <type_traits>
 #include <unordered_set>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 namespace support_std_unordered_set_tests
 {
 using container_t = std::unordered_set<int>;
@@ -35,4 +35,4 @@ TEST_CASE("default_appender builds a std::unordered_set", "[support][unordered_s
     CHECK(container == std::unordered_set<int>{1, 2});
 }
 } // namespace support_std_unordered_set_tests
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

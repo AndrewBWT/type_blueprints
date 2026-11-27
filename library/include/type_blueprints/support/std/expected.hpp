@@ -16,7 +16,7 @@
 // std::in_place.
 #include <utility>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 
 // Holds its value type's placeholder, as a default-constructed one would hold
 // a default-constructed value.
@@ -34,4 +34,4 @@ struct placeholder_value<std::expected<T, E>>
     }
 };
 
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

@@ -13,7 +13,7 @@
  // std::strong_ordering, std::weak_ordering, std::partial_ordering.
 #include <compare>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 
 template <>
 struct placeholder_value<std::strong_ordering>
@@ -45,4 +45,4 @@ struct placeholder_value<std::partial_ordering>
     }
 };
 
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

@@ -19,7 +19,7 @@
 // std::index_sequence, std::make_index_sequence.
 #include <utility>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 
 /*!
  * @brief Specialise to give T a starting value: static constexpr T value().
@@ -142,4 +142,4 @@ private:
 #endif
 };
 
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

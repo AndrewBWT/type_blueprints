@@ -9,7 +9,7 @@
 #include <type_traits>
 #include <vector>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 namespace support_std_vector_tests
 {
 using container_t = std::vector<int>;
@@ -33,4 +33,4 @@ constexpr bool
 
 static_assert(builds());
 } // namespace support_std_vector_tests
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

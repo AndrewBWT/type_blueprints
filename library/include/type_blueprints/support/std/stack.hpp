@@ -13,7 +13,7 @@
 // std::move.
 #include <utility>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 
 template <typename T, typename Container>
 struct adaptor_traits<std::stack<T, Container>>
@@ -25,7 +25,7 @@ struct adaptor_traits<std::stack<T, Container>>
             const std::stack<T, Container>& stack_arg
         ) noexcept
     {
-        return UAB_INTERNAL_NS::standard_adaptor_access<
+        return TYPE_BLUEPRINTS_INTERNAL_NS::standard_adaptor_access<
             std::stack<T, Container>>::container(stack_arg);
     }
 
@@ -38,4 +38,4 @@ struct adaptor_traits<std::stack<T, Container>>
     }
 };
 
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

@@ -13,7 +13,7 @@
  // std::unordered_map.
 #include <unordered_map>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 
 template <typename Key, typename T, typename Hash, typename KeyEqual, typename Allocator>
 struct default_appender<std::unordered_map<Key, T, Hash, KeyEqual, Allocator>>
@@ -22,4 +22,4 @@ struct default_appender<std::unordered_map<Key, T, Hash, KeyEqual, Allocator>>
     using unique_insert_appender<std::unordered_map<Key, T, Hash, KeyEqual, Allocator>>::unique_insert_appender;
 };
 
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

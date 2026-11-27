@@ -14,7 +14,7 @@
 #include <type_traits>
 #include <utility>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 namespace support_std_multimap_tests
 {
 using container_t = std::multimap<int, char>;
@@ -40,4 +40,4 @@ TEST_CASE("default_appender builds a std::multimap", "[support][multimap]")
     CHECK(container == std::multimap<int, char>{{1, 'a'}, {1, 'b'}});
 }
 } // namespace support_std_multimap_tests
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

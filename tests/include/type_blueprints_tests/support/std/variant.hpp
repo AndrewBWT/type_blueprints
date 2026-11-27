@@ -23,7 +23,7 @@ struct unmakeable
 };
 } // namespace variant_test_types
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 namespace support_std_variant_tests
 {
 using namespace ::variant_test_types;
@@ -43,4 +43,4 @@ static_assert(not has_placeholder_value_c<std::variant<int, std::strong_ordering
 // Only the first alternative is tried.
 static_assert(not placeholder_constructible_c<std::variant<unmakeable, int>>);
 } // namespace support_std_variant_tests
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

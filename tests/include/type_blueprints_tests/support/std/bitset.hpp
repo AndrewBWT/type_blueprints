@@ -14,7 +14,7 @@
 #include <type_traits>
 #include <utility>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 namespace support_std_bitset_tests
 {
 static_assert(std::is_same_v<sequence_value_t<std::bitset<4>>, bool>);
@@ -75,4 +75,4 @@ constexpr bool
 
 static_assert(short_bitset_is_incomplete());
 } // namespace support_std_bitset_tests
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

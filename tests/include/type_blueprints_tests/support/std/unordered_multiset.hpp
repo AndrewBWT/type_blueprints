@@ -14,7 +14,7 @@
 #include <type_traits>
 #include <unordered_set>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 namespace support_std_unordered_multiset_tests
 {
 using container_t = std::unordered_multiset<int>;
@@ -35,4 +35,4 @@ TEST_CASE("default_appender builds a std::unordered_multiset", "[support][unorde
     CHECK(container == std::unordered_multiset<int>{1, 1});
 }
 } // namespace support_std_unordered_multiset_tests
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

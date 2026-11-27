@@ -13,7 +13,7 @@
 #include <set>
 #include <type_traits>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 namespace support_std_multiset_tests
 {
 using container_t = std::multiset<int>;
@@ -34,4 +34,4 @@ TEST_CASE("default_appender builds a std::multiset", "[support][multiset]")
     CHECK(container == std::multiset<int>{1, 1});
 }
 } // namespace support_std_multiset_tests
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

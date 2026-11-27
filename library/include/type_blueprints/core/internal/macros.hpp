@@ -1,32 +1,32 @@
 #pragma once
 /*!
  * @file
- * @brief Generic namespace-related macros for unpack_and_build.
+ * @brief Generic namespace-related macros for type_blueprints.
  */
-// The namespace unpack_and_build lives in. Define before including any library
+// The namespace type_blueprints lives in. Define before including any library
 // headers to change it.
-#ifndef UAB_NAMESPACE
-    #define UAB_NAMESPACE unpack_and_build
+#ifndef TYPE_BLUEPRINTS_NAMESPACE
+    #define TYPE_BLUEPRINTS_NAMESPACE type_blueprints
 #endif
-// The internal namespace, inside UAB_NAMESPACE, for implementation details.
-#ifndef UAB_INTERNAL_NAMESPACE
-    #define UAB_INTERNAL_NAMESPACE internal
+// The internal namespace, inside TYPE_BLUEPRINTS_NAMESPACE, for implementation details.
+#ifndef TYPE_BLUEPRINTS_INTERNAL_NAMESPACE
+    #define TYPE_BLUEPRINTS_INTERNAL_NAMESPACE internal
 #endif
-// Used when wanting to refer to the unpack_and_build namespace, such as using a
+// Used when wanting to refer to the type_blueprints namespace, such as using a
 // qualified name from it.
-#define UAB_NS          ::UAB_NAMESPACE
-// Used when wanting to refer to the unpack_and_build internal namespace.
-#define UAB_INTERNAL_NS ::UAB_NAMESPACE::UAB_INTERNAL_NAMESPACE
+#define TYPE_BLUEPRINTS_NS          ::TYPE_BLUEPRINTS_NAMESPACE
+// Used when wanting to refer to the type_blueprints internal namespace.
+#define TYPE_BLUEPRINTS_INTERNAL_NS ::TYPE_BLUEPRINTS_NAMESPACE::TYPE_BLUEPRINTS_INTERNAL_NAMESPACE
 
-// Begins the unpack_and_build namespace.
-#define UAB_NS_BEGIN        \
-    namespace UAB_NAMESPACE \
+// Begins the type_blueprints namespace.
+#define TYPE_BLUEPRINTS_NS_BEGIN        \
+    namespace TYPE_BLUEPRINTS_NAMESPACE \
     {
-// Ends the unpack_and_build namespace.
-#define UAB_NS_END }
-// Begins the internal unpack_and_build namespace.
-#define UAB_INTERNAL_NS_BEGIN        \
-    namespace UAB_INTERNAL_NAMESPACE \
+// Ends the type_blueprints namespace.
+#define TYPE_BLUEPRINTS_NS_END }
+// Begins the internal type_blueprints namespace.
+#define TYPE_BLUEPRINTS_INTERNAL_NS_BEGIN        \
+    namespace TYPE_BLUEPRINTS_INTERNAL_NAMESPACE \
     {
-// Ends the internal unpack_and_build namespace.
-#define UAB_INTERNAL_NS_END }
+// Ends the internal type_blueprints namespace.
+#define TYPE_BLUEPRINTS_INTERNAL_NS_END }

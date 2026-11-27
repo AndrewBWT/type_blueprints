@@ -13,7 +13,7 @@
 #include <set>
 #include <type_traits>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 namespace support_std_set_tests
 {
 using container_t = std::set<int>;
@@ -34,4 +34,4 @@ TEST_CASE("default_appender builds a std::set", "[support][set]")
     CHECK(container == std::set<int>{1, 2});
 }
 } // namespace support_std_set_tests
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

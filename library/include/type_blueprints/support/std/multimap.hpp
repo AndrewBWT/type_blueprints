@@ -13,7 +13,7 @@
  // std::multimap.
 #include <map>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 
 template <typename Key, typename T, typename Compare, typename Allocator>
 struct default_appender<std::multimap<Key, T, Compare, Allocator>>
@@ -22,4 +22,4 @@ struct default_appender<std::multimap<Key, T, Compare, Allocator>>
     using multi_insert_appender<std::multimap<Key, T, Compare, Allocator>>::multi_insert_appender;
 };
 
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

@@ -13,7 +13,7 @@
  // std::deque.
 #include <deque>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 
 template <typename T, typename Allocator>
 struct default_appender<std::deque<T, Allocator>>
@@ -22,4 +22,4 @@ struct default_appender<std::deque<T, Allocator>>
     using push_back_appender<std::deque<T, Allocator>>::push_back_appender;
 };
 
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

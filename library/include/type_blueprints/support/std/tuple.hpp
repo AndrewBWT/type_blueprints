@@ -14,7 +14,7 @@
 // std::is_default_constructible_v.
 #include <type_traits>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 
 // Each element is made from its own placeholder.
 template <typename... Ts>
@@ -29,4 +29,4 @@ struct placeholder_value<std::tuple<Ts...>>
     }
 };
 
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

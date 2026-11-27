@@ -23,7 +23,7 @@ struct unmakeable
 };
 } // namespace unexpected_test_types
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 namespace support_std_unexpected_tests
 {
 using namespace ::unexpected_test_types;
@@ -34,4 +34,4 @@ static_assert(make_placeholder<std::unexpected<std::strong_ordering>>().error()
               == std::strong_ordering::equal);
 static_assert(not placeholder_constructible_c<std::unexpected<unmakeable>>);
 } // namespace support_std_unexpected_tests
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

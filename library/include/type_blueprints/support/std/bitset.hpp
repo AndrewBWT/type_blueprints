@@ -20,7 +20,7 @@
 // std::size_t.
 #include <cstddef>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 
 /*!
  * @brief A std::bitset's bits, most significant first.
@@ -152,4 +152,4 @@ struct default_appender<std::bitset<N>> : bitset_appender<N>
     using bitset_appender<N>::bitset_appender;
 };
 
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

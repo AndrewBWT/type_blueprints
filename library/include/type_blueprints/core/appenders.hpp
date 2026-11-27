@@ -30,7 +30,7 @@
 // std::move.
 #include <utility>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 
 /*!
  * @brief The appender used to build T from its elements.
@@ -86,4 +86,4 @@ concept buildable_sequence_c
 = requires { typename sequence_build_value<T>::type; }
 && appender_c<default_appender<T>, T>;
 
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

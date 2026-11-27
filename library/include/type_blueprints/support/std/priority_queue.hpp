@@ -15,7 +15,7 @@
 // std::move.
 #include <utility>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 
 template <typename T, typename Container, typename Compare>
 struct adaptor_traits<std::priority_queue<T, Container, Compare>>
@@ -28,7 +28,7 @@ struct adaptor_traits<std::priority_queue<T, Container, Compare>>
             const std::priority_queue<T, Container, Compare>& queue_arg
         ) noexcept
     {
-        return UAB_INTERNAL_NS::standard_adaptor_access<
+        return TYPE_BLUEPRINTS_INTERNAL_NS::standard_adaptor_access<
             std::priority_queue<T, Container, Compare>>::container(queue_arg);
     }
 
@@ -62,4 +62,4 @@ struct adaptor_traits<std::priority_queue<T, Container, Compare>>
     }
 };
 
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

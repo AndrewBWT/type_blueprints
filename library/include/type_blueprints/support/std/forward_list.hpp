@@ -14,7 +14,7 @@
  // std::forward_list.
 #include <forward_list>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 
 template <typename T, typename Allocator>
 struct default_appender<std::forward_list<T, Allocator>>
@@ -23,4 +23,4 @@ struct default_appender<std::forward_list<T, Allocator>>
     using insert_after_appender<std::forward_list<T, Allocator>>::insert_after_appender;
 };
 
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

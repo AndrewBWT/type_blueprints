@@ -16,7 +16,7 @@
 #include <string>
 #include <vector>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 namespace push_back_tests
 {
 static_assert(appender_c<push_back_appender<std::vector<int>>, std::vector<int>>);
@@ -63,4 +63,4 @@ TEST_CASE("push_back_appender fills std::deque and std::list", "[appenders][push
     CHECK(list == std::list<int>{8});
 }
 } // namespace push_back_tests
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

@@ -14,7 +14,7 @@
 #include <forward_list>
 #include <type_traits>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 namespace support_std_forward_list_tests
 {
 using container_t = std::forward_list<int>;
@@ -35,4 +35,4 @@ TEST_CASE("default_appender builds a std::forward_list", "[support][forward_list
     CHECK(container == std::forward_list<int>{1, 2});
 }
 } // namespace support_std_forward_list_tests
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

@@ -5,7 +5,7 @@
  */
 #include "type_blueprints/core/internal/macros.hpp"
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 
 /*!
  * @brief What happened when an appender was given an element. Appenders only
@@ -23,4 +23,4 @@ enum class append_result
     full
 };
 
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

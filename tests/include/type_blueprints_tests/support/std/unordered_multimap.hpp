@@ -15,7 +15,7 @@
 #include <unordered_map>
 #include <utility>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 namespace support_std_unordered_multimap_tests
 {
 using container_t = std::unordered_multimap<int, char>;
@@ -41,4 +41,4 @@ TEST_CASE("default_appender builds a std::unordered_multimap", "[support][unorde
     CHECK(container == std::unordered_multimap<int, char>{{1, 'a'}, {1, 'b'}});
 }
 } // namespace support_std_unordered_multimap_tests
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

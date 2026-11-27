@@ -14,7 +14,7 @@
 // std::pair.
 #include <utility>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 
 // Each element is made from its own placeholder.
 template <typename T1, typename T2>
@@ -31,4 +31,4 @@ struct placeholder_value<std::pair<T1, T2>>
     }
 };
 
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

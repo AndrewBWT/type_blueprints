@@ -13,7 +13,7 @@
  // std::basic_string.
 #include <string>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 
 template <typename CharT, typename Traits, typename Allocator>
 struct default_appender<std::basic_string<CharT, Traits, Allocator>>
@@ -22,4 +22,4 @@ struct default_appender<std::basic_string<CharT, Traits, Allocator>>
     using push_back_appender<std::basic_string<CharT, Traits, Allocator>>::push_back_appender;
 };
 
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END

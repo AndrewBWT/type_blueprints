@@ -13,7 +13,7 @@
 #include <list>
 #include <type_traits>
 
-UAB_NS_BEGIN
+TYPE_BLUEPRINTS_NS_BEGIN
 namespace support_std_list_tests
 {
 using container_t = std::list<int>;
@@ -34,4 +34,4 @@ TEST_CASE("default_appender builds a std::list", "[support][list]")
     CHECK(container == std::list<int>{1, 2});
 }
 } // namespace support_std_list_tests
-UAB_NS_END
+TYPE_BLUEPRINTS_NS_END
