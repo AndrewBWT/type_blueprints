@@ -1,14 +1,17 @@
 /*!
  * @file
- * @brief Tests for enum_element, enum_list, enum_list_view, has_enum_list_c
- * and enumerators_of.
+ * @brief Tests for enum_element, enum_list (base lists and versions),
+ * enum_list_view, has_enum_list_c and enumerators_of.
  *
  * Compile-time behaviour is checked with static_assert, so this file only
  * compiles if it holds. Runtime behaviour (runtime lists, and the exceptions
  * the constructors throw) is checked with Catch2.
  *
- * An invalid compile-time enum_list is a compile error by design, so it can't
- * be checked here; see the note at the end of the file.
+ * Using a broken compile-time enum_list is a compile error by design. The
+ * broken lists below are never passed to enumerators_of; instead the function
+ * that checks each list, make_checked_view, is called at runtime, and what it
+ * throws is checked. enumerators_of only reaches a list through that
+ * function, during constant evaluation, where a throw is a compile error.
  */
 #include "type_blueprints/core/enum.hpp"
 
@@ -23,11 +26,12 @@
 #include <string>
 #include <string_view>
 #include <type_traits>
+#include <utility>
 #include <vector>
 
 // ============================================================ test types
 
-// Listed with a built-in array.
+// Listed with a built-in array, with two versions.
 enum class colour
 {
     red,
@@ -50,6 +54,36 @@ enum class plain
     c
 };
 
+// Sparse, very large and negative values, listed out of numeric order.
+enum class sparse : long long
+{
+    negative = -9'000'000'000'000'000'000LL,
+    zero = 0,
+    huge = 9'000'000'000'000'000'000LL,
+    middle = 1LL << 40,
+};
+
+// An unscoped enumeration.
+enum unscoped
+{
+    unscoped_first,
+    unscoped_second
+};
+
+// Has an alias: only one of the two names can be listed.
+enum class with_alias
+{
+    first,
+    last,
+    final_one = last
+};
+
+// Has a version but no base list.
+enum class orphan
+{
+    a
+};
+
 // enum_list specialisations that don't fit has_enum_list_c.
 enum class wrong_element_type
 {
@@ -66,6 +100,73 @@ struct not_an_enum
 {
 };
 
+// Version tags.
+struct french
+{
+};
+
+struct symbols
+{
+};
+
+// Never used as a version.
+struct unused_version
+{
+};
+
+// Broken lists: one enumeration per broken rule. Never passed to
+// enumerators_of, which would be a compile error.
+enum class broken_empty_list
+{
+    a
+};
+
+enum class broken_empty_name
+{
+    a,
+    b
+};
+
+enum class broken_repeated_value
+{
+    a,
+    b
+};
+
+enum class broken_repeated_name
+{
+    a,
+    b
+};
+
+enum class broken_name_with_space
+{
+    a
+};
+
+enum class broken_name_starting_with_digit
+{
+    a
+};
+
+enum class broken_non_ascii_name
+{
+    a
+};
+
+// Tags for versions of colour (whose base list is fine) that are broken.
+struct missing_value_version
+{
+};
+
+struct wrong_order_version
+{
+};
+
+struct repeated_name_version
+{
+};
+
 UAB_NS_BEGIN
 
 template <>
@@ -79,10 +180,68 @@ struct enum_list<colour>
 };
 
 template <>
+struct enum_list<colour, french>
+{
+    static constexpr enum_element<colour> values[] = {
+        {colour::red,   u8"rouge"},
+        {colour::green, u8"vert" },
+        {colour::blue,  u8"bleu" },
+    };
+};
+
+// Non-ASCII names are fine in a version.
+template <>
+struct enum_list<colour, symbols>
+{
+    static constexpr enum_element<colour> values[] = {
+        {colour::red,   u8"●"},
+        {colour::green, u8"✓"},
+        {colour::blue,  u8"✗"},
+    };
+};
+
+template <>
 struct enum_list<size>
 {
     static constexpr std::array<enum_element<size>, 2> values{
         {{size::small, u8"small"}, {size::large, u8"large"}}
+    };
+};
+
+template <>
+struct enum_list<sparse>
+{
+    static constexpr enum_element<sparse> values[] = {
+        {sparse::negative, u8"negative"},
+        {sparse::zero,     u8"zero"    },
+        {sparse::huge,     u8"huge"    },
+        {sparse::middle,   u8"middle"  },
+    };
+};
+
+template <>
+struct enum_list<unscoped>
+{
+    static constexpr enum_element<unscoped> values[] = {
+        {unscoped_first,  u8"unscoped_first" },
+        {unscoped_second, u8"unscoped_second"},
+    };
+};
+
+template <>
+struct enum_list<with_alias>
+{
+    static constexpr enum_element<with_alias> values[] = {
+        {with_alias::first, u8"first"},
+        {with_alias::last,  u8"last" },
+    };
+};
+
+template <>
+struct enum_list<orphan, french>
+{
+    static constexpr enum_element<orphan> values[] = {
+        {orphan::a, u8"a"},
     };
 };
 
@@ -97,6 +256,97 @@ struct enum_list<wrong_member_name>
 {
     static constexpr enum_element<wrong_member_name> entries[] = {
         {wrong_member_name::a, u8"a"},
+    };
+};
+
+// ------------------------------------------------------------ broken lists
+
+template <>
+struct enum_list<broken_empty_list>
+{
+    // A built-in array can't be empty, so this uses a std::array.
+    static constexpr std::array<enum_element<broken_empty_list>, 0> values{};
+};
+
+template <>
+struct enum_list<broken_empty_name>
+{
+    static constexpr enum_element<broken_empty_name> values[] = {
+        {broken_empty_name::a, u8"a"},
+        {broken_empty_name::b, u8"" },
+    };
+};
+
+template <>
+struct enum_list<broken_repeated_value>
+{
+    static constexpr enum_element<broken_repeated_value> values[] = {
+        {broken_repeated_value::a, u8"a"},
+        {broken_repeated_value::a, u8"b"},
+    };
+};
+
+template <>
+struct enum_list<broken_repeated_name>
+{
+    static constexpr enum_element<broken_repeated_name> values[] = {
+        {broken_repeated_name::a, u8"a"},
+        {broken_repeated_name::b, u8"a"},
+    };
+};
+
+template <>
+struct enum_list<broken_name_with_space>
+{
+    static constexpr enum_element<broken_name_with_space> values[] = {
+        {broken_name_with_space::a, u8"a b"},
+    };
+};
+
+template <>
+struct enum_list<broken_name_starting_with_digit>
+{
+    static constexpr enum_element<broken_name_starting_with_digit> values[] = {
+        {broken_name_starting_with_digit::a, u8"2a"},
+    };
+};
+
+// C++ allows some non-ASCII identifiers, but base names must be ASCII.
+template <>
+struct enum_list<broken_non_ascii_name>
+{
+    static constexpr enum_element<broken_non_ascii_name> values[] = {
+        {broken_non_ascii_name::a, u8"été"},
+    };
+};
+
+template <>
+struct enum_list<colour, missing_value_version>
+{
+    static constexpr enum_element<colour> values[] = {
+        {colour::red,   u8"rouge"},
+        {colour::green, u8"vert" },
+    };
+};
+
+template <>
+struct enum_list<colour, wrong_order_version>
+{
+    static constexpr enum_element<colour> values[] = {
+        {colour::green, u8"vert" },
+        {colour::red,   u8"rouge"},
+        {colour::blue,  u8"bleu" },
+    };
+};
+
+// A version can still break the general rules.
+template <>
+struct enum_list<colour, repeated_name_version>
+{
+    static constexpr enum_element<colour> values[] = {
+        {colour::red,   u8"x"},
+        {colour::green, u8"y"},
+        {colour::blue,  u8"x"},
     };
 };
 
@@ -120,6 +370,18 @@ namespace enums_tests
 
     static_assert(has_enum_list_c<colour>);
     static_assert(has_enum_list_c<size>);
+    static_assert(has_enum_list_c<sparse>);
+    static_assert(has_enum_list_c<unscoped>);
+    // void is the base list.
+    static_assert(has_enum_list_c<colour, void>);
+
+    // Versions.
+    static_assert(has_enum_list_c<colour, french>);
+    static_assert(has_enum_list_c<colour, symbols>);
+    static_assert(not has_enum_list_c<colour, unused_version>);
+    // A version needs a base list.
+    static_assert(not has_enum_list_c<orphan, french>);
+    static_assert(not has_enum_list_c<orphan>);
 
     // No enum_list specialisation.
     static_assert(not has_enum_list_c<plain>);
@@ -159,9 +421,98 @@ namespace enums_tests
     static_assert(enumerators_of<colour>().find(colour::blue)
         == &enum_list<colour>::values[2]);
 
+    // index_of by value and by name; npos on a miss.
+    static_assert(enumerators_of<colour>().index_of(colour::red) == 0);
+    static_assert(enumerators_of<colour>().index_of(colour::blue) == 2);
+    static_assert(enumerators_of<colour>().index_of(u8"green") == 1);
+    static_assert(enumerators_of<colour>().index_of(static_cast<colour>(42))
+        == enum_list_view<colour>::npos);
+    static_assert(enumerators_of<colour>().index_of(u8"purple")
+        == enum_list_view<colour>::npos);
+
+    // name_of; empty on a miss.
+    static_assert(enumerators_of<colour>().name_of(colour::green) == u8"green");
+    static_assert(enumerators_of<colour>().name_of(static_cast<colour>(42)).empty());
+
     // The view enumerators_of returns can be kept, and used at runtime.
     constexpr enum_list_view<colour> stored_colours = enumerators_of<colour>();
     static_assert(stored_colours.size() == 3);
+
+    // ============================================================ sparse, large
+    // and negative values, and unscoped enumerations
+
+    // Order is the list's order, not numeric order.
+    static_assert(enumerators_of<sparse>()[2].value == sparse::huge);
+    static_assert(enumerators_of<sparse>()[3].value == sparse::middle);
+    static_assert(enumerators_of<sparse>().index_of(sparse::negative) == 0);
+    static_assert(enumerators_of<sparse>().name_of(sparse::huge) == u8"huge");
+    static_assert(enumerators_of<sparse>().find(u8"middle")->value == sparse::middle);
+    // A value between listed values isn't found.
+    static_assert(enumerators_of<sparse>().find(static_cast<sparse>(1)) == nullptr);
+
+    static_assert(enumerators_of<unscoped>().find(unscoped_second)->name
+        == u8"unscoped_second");
+
+    // The alias's value is found under the listed name.
+    static_assert(enumerators_of<with_alias>().name_of(with_alias::final_one)
+        == u8"last");
+
+    // ============================================================ versions
+
+    // A version is the same type of view as the base list.
+    static_assert(std::is_same_v<
+        decltype(enumerators_of<colour, french>()),
+        enum_list_view<colour>>);
+
+    // Same values, same order, different names.
+    static_assert(enumerators_of<colour, french>().size() == 3);
+    static_assert(enumerators_of<colour, french>()[1].value == colour::green);
+    static_assert(enumerators_of<colour, french>()[1].name == u8"vert");
+    static_assert(enumerators_of<colour, french>().name_of(colour::blue) == u8"bleu");
+    static_assert(enumerators_of<colour, french>().find(u8"rouge")->value == colour::red);
+    // Base names aren't in the version.
+    static_assert(enumerators_of<colour, french>().find(u8"red") == nullptr);
+
+    // An index means the same enumerator in every version.
+    constexpr bool
+        indices_agree_across_versions()
+    {
+        constexpr auto base{ enumerators_of<colour>() };
+        constexpr auto in_french{ enumerators_of<colour, french>() };
+        constexpr auto in_symbols{ enumerators_of<colour, symbols>() };
+        for (std::size_t idx{ 0 }; idx < base.size(); ++idx)
+        {
+            const colour value{ base[idx].value };
+            if (in_french.index_of(value) != idx
+                || in_symbols.index_of(value) != idx)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    static_assert(indices_agree_across_versions());
+
+    // Non-ASCII names in a version.
+    static_assert(enumerators_of<colour, symbols>().name_of(colour::green) == u8"✓");
+    static_assert(enumerators_of<colour, symbols>().find(u8"✗")->value == colour::blue);
+
+    // ============================================================ ASCII
+    // identifier check, used on base names
+
+    static_assert(UAB_INTERNAL_NS::is_ascii_identifier(u8"red"));
+    static_assert(UAB_INTERNAL_NS::is_ascii_identifier(u8"_red"));
+    static_assert(UAB_INTERNAL_NS::is_ascii_identifier(u8"Red_2"));
+    static_assert(UAB_INTERNAL_NS::is_ascii_identifier(u8"_"));
+    static_assert(not UAB_INTERNAL_NS::is_ascii_identifier(u8""));
+    static_assert(not UAB_INTERNAL_NS::is_ascii_identifier(u8"2red"));
+    static_assert(not UAB_INTERNAL_NS::is_ascii_identifier(u8"dark green"));
+    static_assert(not UAB_INTERNAL_NS::is_ascii_identifier(u8"red-ish"));
+    static_assert(not UAB_INTERNAL_NS::is_ascii_identifier(u8"geo::red"));
+    static_assert(not UAB_INTERNAL_NS::is_ascii_identifier(u8"été"));
+    // An embedded null; built with a length, as a literal would stop at it.
+    static_assert(not UAB_INTERNAL_NS::is_ascii_identifier(std::u8string_view(u8"red\0", 4)));
 
     // ============================================================ lists built in
     // constant evaluation, for an enum with no enum_list
@@ -175,7 +526,7 @@ namespace enums_tests
         };
         const enum_list_view view(list);
         return view.size() == 2 && view.find(u8"b")->value == plain::b
-            && view.find(plain::c) == nullptr;
+            && view.find(plain::c) == nullptr && view.index_of(plain::b) == 1;
     }
 
     static_assert(builds_from_vector_in_constant_evaluation());
@@ -212,6 +563,9 @@ namespace enums_tests
         enum_list_view<plain>>);
     static_assert(std::is_same_v<
         decltype(enum_list_view(std::declval<std::vector<enum_element<plain>>&>())),
+        enum_list_view<plain>>);
+    static_assert(std::is_same_v<
+        decltype(enum_list_view(plain_array, 1)),
         enum_list_view<plain>>);
     // A span, including one of non-const elements.
     static_assert(std::is_same_v<
@@ -267,12 +621,16 @@ namespace enums_tests
     static_assert(noexcept(stored_colours[0]));
     static_assert(noexcept(stored_colours.find(colour::red)));
     static_assert(noexcept(stored_colours.find(u8"red")));
+    static_assert(noexcept(stored_colours.index_of(colour::red)));
+    static_assert(noexcept(stored_colours.index_of(u8"red")));
+    static_assert(noexcept(stored_colours.name_of(colour::red)));
 
     // ============================================================ runtime
 
     TEST_CASE("A runtime list can be viewed and searched", "[enums]")
     {
-        // Names built at runtime, kept in storage that outlives the view.
+        // Names built at runtime, kept in storage that outlives the view. A
+        // runtime list's names needn't be identifiers.
         std::vector<std::u8string> names{ u8"rouge", u8"vert" };
         names[0] += u8"!";
         const std::vector<enum_element<colour>> list{
@@ -288,6 +646,10 @@ namespace enums_tests
         CHECK(view.find(colour::green)->name == u8"vert");
         CHECK(view.find(colour::blue) == nullptr);
         CHECK(view.find(u8"rouge") == nullptr);
+        CHECK(view.index_of(u8"vert") == 1);
+        CHECK(view.index_of(colour::blue) == enum_list_view<colour>::npos);
+        CHECK(view.name_of(colour::red) == u8"rouge!");
+        CHECK(view.name_of(colour::blue).empty());
     }
 
     TEST_CASE("Every constructor accepts a valid runtime list", "[enums]")
@@ -329,6 +691,18 @@ namespace enums_tests
         CHECK(stored_colours.size() == 3);
         REQUIRE(stored_colours.find(u8"green") != nullptr);
         CHECK(stored_colours.find(u8"green")->value == colour::green);
+    }
+
+    TEST_CASE("Versions can be used at runtime", "[enums]")
+    {
+        // A runtime value, so the lookups can't be folded at compile time.
+        std::vector<colour> picked{ colour::blue };
+        const colour value{ picked.front() };
+        const enum_list_view<colour> in_symbols{ enumerators_of<colour, symbols>() };
+
+        CHECK(in_symbols.name_of(value) == u8"✗");
+        CHECK(enumerators_of<colour, french>().name_of(value) == u8"bleu");
+        CHECK(enumerators_of<colour>().index_of(value) == in_symbols.index_of(value));
     }
 
     TEST_CASE("An invalid runtime list throws std::invalid_argument", "[enums]")
@@ -406,20 +780,96 @@ namespace enums_tests
             CHECK_THROWS_AS(enum_list_view<plain>(array, 2), std::invalid_argument);
         }
     }
+
+    TEST_CASE("A broken compile-time list is rejected", "[enums]")
+    {
+        // What enumerators_of would do at compile time, done at runtime so the
+        // exception can be checked. At compile time each of these is an error.
+        using UAB_INTERNAL_NS::make_checked_view;
+
+        SECTION("An empty list")
+        {
+            REQUIRE_THROWS_WITH(
+                (make_checked_view<broken_empty_list, void>()),
+                "enum_list must contain at least one entry"
+            );
+        }
+
+        SECTION("An empty name")
+        {
+            REQUIRE_THROWS_WITH(
+                (make_checked_view<broken_empty_name, void>()),
+                "enum_list names must be non-empty"
+            );
+        }
+
+        SECTION("A repeated value")
+        {
+            REQUIRE_THROWS_WITH(
+                (make_checked_view<broken_repeated_value, void>()),
+                "enum_list values must be unique"
+            );
+        }
+
+        SECTION("A repeated name")
+        {
+            REQUIRE_THROWS_WITH(
+                (make_checked_view<broken_repeated_name, void>()),
+                "enum_list names must be unique"
+            );
+        }
+
+        SECTION("A base name that isn't an identifier")
+        {
+            REQUIRE_THROWS_WITH(
+                (make_checked_view<broken_name_with_space, void>()),
+                "enum_list base names must be ASCII identifiers"
+            );
+            REQUIRE_THROWS_WITH(
+                (make_checked_view<broken_name_starting_with_digit, void>()),
+                "enum_list base names must be ASCII identifiers"
+            );
+        }
+
+        SECTION("A base name that isn't ASCII")
+        {
+            REQUIRE_THROWS_WITH(
+                (make_checked_view<broken_non_ascii_name, void>()),
+                "enum_list base names must be ASCII identifiers"
+            );
+        }
+
+        SECTION("A version missing a value")
+        {
+            REQUIRE_THROWS_WITH(
+                (make_checked_view<colour, missing_value_version>()),
+                "enum_list version must list every value in the base list"
+            );
+        }
+
+        SECTION("A version in the wrong order")
+        {
+            REQUIRE_THROWS_WITH(
+                (make_checked_view<colour, wrong_order_version>()),
+                "enum_list version must list values in the base list's order"
+            );
+        }
+
+        SECTION("A version breaking a general rule")
+        {
+            REQUIRE_THROWS_WITH(
+                (make_checked_view<colour, repeated_name_version>()),
+                "enum_list names must be unique"
+            );
+        }
+
+        SECTION("Valid lists pass")
+        {
+            CHECK_NOTHROW(make_checked_view<colour, void>());
+            CHECK_NOTHROW(make_checked_view<colour, french>());
+            CHECK_NOTHROW(make_checked_view<colour, symbols>());
+        }
+    }
 } // namespace enums_tests
 
 UAB_NS_END
-
-/*
- * Not tested here: an invalid compile-time enum_list. Using
- * enumerators_of<E>() on one is a compile error by design, so a test that
- * includes one can't build. To check it, compile a separate file that should
- * fail, e.g. with CMake:
- *
- *   try_compile(invalid_list_compiles ${CMAKE_BINARY_DIR}/invalid_list
- *       SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/should_not_compile/invalid_list.cpp
- *       CXX_STANDARD 23)
- *   if (invalid_list_compiles)
- *       message(FATAL_ERROR "An invalid enum_list compiled")
- *   endif ()
- */
