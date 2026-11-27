@@ -21,7 +21,7 @@ include(FetchContent)
 
 # Set up the project information
 project(
-  unpack_and_build
+  type_blueprints
   VERSION 			0.0.1
   DESCRIPTION 		"A C++ library for unpacking, building and simplifying generic data code creation around enums, objects, and collections."
   LANGUAGES 		CXX
@@ -29,51 +29,51 @@ project(
 
 # Set up the variables TOP_LEVEL_PROJECT and RUNNING_TESTS
 
-# UNPACK_AND_BUILD_TOP_LEVEL_PROJECT informs the user if this is the top level project.
+# TYPE_BLUEPRINTS_TOP_LEVEL_PROJECT informs the user if this is the top level project.
 # If it is the top level project, we assume that it is being built on its own.
-set(UNPACK_AND_BUILD_TOP_LEVEL_PROJECT FALSE)
+set(TYPE_BLUEPRINTS_TOP_LEVEL_PROJECT FALSE)
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
-  set(UNPACK_AND_BUILD_TOP_LEVEL_PROJECT TRUE)
+  set(TYPE_BLUEPRINTS_TOP_LEVEL_PROJECT TRUE)
 endif()
 
 # We include this here so that the variable BUILD_TESTING is now defined as TRUE (due to its inclusion by CTest).
 # Remember, the user can set BUILD_TESTING themselves if they so wish, include(CTest) won't override that value.
-if(UNPACK_AND_BUILD_TOP_LEVEL_PROJECT)
+if(TYPE_BLUEPRINTS_TOP_LEVEL_PROJECT)
   include(CTest)
 endif()
 
-# Ensures that BUILD_TESTING is defined as FALSE. If UNPACK_AND_BUILD_TOP_LEVEL_PROJECT == FALSE, it would be an undefined value.
+# Ensures that BUILD_TESTING is defined as FALSE. If TYPE_BLUEPRINTS_TOP_LEVEL_PROJECT == FALSE, it would be an undefined value.
 if(NOT DEFINED BUILD_TESTING)
   set(BUILD_TESTING OFF)
 endif()
 
-# Sets up the UNPACK_AND_BUILD_RUNNING_TESTS variable.
-set(UNPACK_AND_BUILD_RUNNING_TESTS FALSE)
-if(UNPACK_AND_BUILD_TOP_LEVEL_PROJECT AND BUILD_TESTING)
-  set(UNPACK_AND_BUILD_RUNNING_TESTS TRUE)
+# Sets up the TYPE_BLUEPRINTS_RUNNING_TESTS variable.
+set(TYPE_BLUEPRINTS_RUNNING_TESTS FALSE)
+if(TYPE_BLUEPRINTS_TOP_LEVEL_PROJECT AND BUILD_TESTING)
+  set(TYPE_BLUEPRINTS_RUNNING_TESTS TRUE)
 endif()
 
 # Set up the options for the user.
-option(UNPACK_AND_BUILD_ENABLE_DOCS "Build unpack_and_build documentation" ${UNPACK_AND_BUILD_TOP_LEVEL_PROJECT})
-option(UNPACK_AND_BUILD_ENABLE_TESTS "Build unpack_and_build tests" ${UNPACK_AND_BUILD_RUNNING_TESTS})
-option(UNPACK_AND_BUILD_ENABLE_EXAMPLES "Build unpack_and_build examples" ${UNPACK_AND_BUILD_TOP_LEVEL_PROJECT})
-option(UNPACK_AND_BUILD_ENABLE_ALGORITHM_BENCHMARKS "Build the unpack_and_build algorithm benchmarks" ${UNPACK_AND_BUILD_TOP_LEVEL_PROJECT})
+option(TYPE_BLUEPRINTS_ENABLE_DOCS "Build type_blueprints documentation" ${TYPE_BLUEPRINTS_TOP_LEVEL_PROJECT})
+option(TYPE_BLUEPRINTS_ENABLE_TESTS "Build type_blueprints tests" ${TYPE_BLUEPRINTS_RUNNING_TESTS})
+option(TYPE_BLUEPRINTS_ENABLE_EXAMPLES "Build type_blueprints examples" ${TYPE_BLUEPRINTS_TOP_LEVEL_PROJECT})
+option(TYPE_BLUEPRINTS_ENABLE_ALGORITHM_BENCHMARKS "Build the type_blueprints algorithm benchmarks" ${TYPE_BLUEPRINTS_TOP_LEVEL_PROJECT})
 
 # Show the user the status of the core variables.
-message(STATUS "unpack_and_build - Top level project: ${UNPACK_AND_BUILD_TOP_LEVEL_PROJECT}")
-message(STATUS "unpack_and_build - Building tests: ${UNPACK_AND_BUILD_ENABLE_TESTS}")
-message(STATUS "unpack_and_build - Building docs: ${UNPACK_AND_BUILD_ENABLE_DOCS}")
-message(STATUS "unpack_and_build - Building examples: ${UNPACK_AND_BUILD_ENABLE_EXAMPLES}")
+message(STATUS "type_blueprints - Top level project: ${TYPE_BLUEPRINTS_TOP_LEVEL_PROJECT}")
+message(STATUS "type_blueprints - Building tests: ${TYPE_BLUEPRINTS_ENABLE_TESTS}")
+message(STATUS "type_blueprints - Building docs: ${TYPE_BLUEPRINTS_ENABLE_DOCS}")
+message(STATUS "type_blueprints - Building examples: ${TYPE_BLUEPRINTS_ENABLE_EXAMPLES}")
   
 # Add the library folder.
 add_subdirectory(library)
 
 # Enable tests if required
-if(UNPACK_AND_BUILD_ENABLE_TESTS)
+if(TYPE_BLUEPRINTS_ENABLE_TESTS)
   add_subdirectory(tests)
 endif()
 
 # Enable examples if required
-#if(UNPACK_AND_BUILD_ENABLE_EXAMPLES)
+#if(TYPE_BLUEPRINTS_ENABLE_EXAMPLES)
 #  add_subdirectory(examples)
 #endif()

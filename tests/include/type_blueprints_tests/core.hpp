@@ -1,0 +1,10 @@
+#pragma once
+#include "type_blueprints_tests/core/adaptors.hpp"
+#include "type_blueprints_tests/core/appenders.hpp"
+#include "type_blueprints_tests/core/build_from.hpp"
+#include "type_blueprints_tests/core/enum.hpp"
+#include "type_blueprints_tests/core/extended_concepts.hpp"
+#include "type_blueprints_tests/core/object.hpp"
+#include "type_blueprints_tests/core/placeholders.hpp"
+#include "type_blueprints_tests/core/sequence_traits.hpp"
+#include "type_blueprints_tests/core/tuples.hpp"
